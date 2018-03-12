@@ -1,0 +1,10 @@
+site_name: pytest-runtime-info
+site_description: Plugin that allows showing runtime info in ide
+site_author: Tibor Arpas
+
+theme: readthedocs
+
+repo_url: https://github.com/tarpas/pytest-runtime-info
+
+pages:
+- Home: index.md
