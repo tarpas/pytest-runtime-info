@@ -72,3 +72,5 @@ target/
 .python-version
 
 .ropeproject/
+
+\.pytest_cache/
