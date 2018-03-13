@@ -14,7 +14,7 @@ def pytest_runtest_makereport(call, item):
         last_mark_info = None
         exception_text = get_exception_text(call.excinfo)
         for traceback_entry in call.excinfo.traceback:
-            if not is_project_path(traceback_entry.path):
+            if not is_project_path(traceback_entry.path, item.config.rootdir):
                 continue  # skiping files outside of project path
             striped_statement = str(traceback_entry.statement).lstrip()
             start = len(str(traceback_entry.statement)) - len(striped_statement)
@@ -54,8 +54,7 @@ def get_temp_file_path():
     return os.path.join(str(tempdir), "runtime_test_report.json")
 
 
-def is_project_path(path):
-    cwd = os.getcwd()
+def is_project_path(path, cwd):
     prefix = os.path.commonprefix([str(path), str(cwd)])
     if cwd == prefix:
         return True
