@@ -74,3 +74,5 @@ target/
 .ropeproject/
 
 \.pytest_cache/
+
+\.DS_Store
