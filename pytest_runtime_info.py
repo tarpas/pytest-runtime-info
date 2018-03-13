@@ -51,12 +51,12 @@ def pytest_sessionfinish():
 
 def get_temp_file_path():
     tempdir = tempfile.gettempdir()
-    return os.path.join(tempdir, "runtime_test_report.json")
+    return os.path.join(str(tempdir), "runtime_test_report.json")
 
 
 def is_project_path(path):
     cwd = os.getcwd()
-    prefix = os.path.commonprefix([path, cwd])
+    prefix = os.path.commonprefix([str(path), str(cwd)])
     if cwd == prefix:
         return True
     return False

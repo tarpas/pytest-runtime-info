@@ -50,9 +50,9 @@ def test_plugin(testdir, lib_py, a_py, b_py):
     with open(result_file) as result_stream:
         result_json = result_stream.read()
         result = json.loads(result_json)
-    a_file = os.path.join(testdir.tmpdir, "test_a.py")
-    b_file = os.path.join(testdir.tmpdir, "test_b.py")
-    lib_file = os.path.join(testdir.tmpdir, "lib.py")
+    a_file = os.path.join(str(testdir.tmpdir), "test_a.py")
+    b_file = os.path.join(str(testdir.tmpdir), "test_b.py")
+    lib_file = os.path.join(str(testdir.tmpdir), "lib.py")
     assert len(result["exceptions"]) == 2
     assert len([x for x in result["exceptions"] if x["path"] == lib_file]) == 1
     assert len([x for x in result["exceptions"] if x["path"] == b_file]) == 1
