@@ -1,10 +1,12 @@
 import pytest_runtime_info
 import os
 import json
+import pytest
 
 
-def test_tracebak(testdir):
-    testdir.makepyfile("""
+@pytest.fixture
+def multiply_py(testdir):
+    return testdir.makepyfile(test_multiply="""
         def multiply():
             return 2 * 4 / 0
 
@@ -14,6 +16,9 @@ def test_tracebak(testdir):
         def test_multiply():
             call_multiply()
     """)
+
+
+def test_tracebak(testdir, multiply_py):
     result_file = pytest_runtime_info.getTempFilePath()
     try:
         file_modified = os.stat(result_file).st_mtime
@@ -27,7 +32,7 @@ def test_tracebak(testdir):
     with open(result_file) as result_stream:
         result_json = result_stream.read()
         result = json.loads(result_json)
-    tmpfile = os.path.join(testdir.tmpdir, "test_tracebak.py")
+    tmpfile = os.path.join(testdir.tmpdir, "test_multiply.py")
     assert len(result["exceptions"]) == 1
     assert result["exceptions"][0]["path"] == tmpfile
     assert len(result["fileMarkList"]) == 1
