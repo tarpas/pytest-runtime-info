@@ -37,7 +37,7 @@ def b_py(testdir):
 
 
 def test_plugin(testdir, lib_py, a_py, b_py):
-    result_file = pytest_runtime_info.getTempFilePath()
+    result_file = pytest_runtime_info.get_temp_file_path()
     try:
         file_modified = os.stat(result_file).st_mtime
     except Exception:

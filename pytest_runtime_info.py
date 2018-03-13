@@ -45,11 +45,11 @@ def pytest_sessionfinish():
     exception_strings = [get_exception_json(e) for e in exceptions]
     exception_string = ",".join(exception_strings)
     jsonOutput = FILE_TEMPLATE.format(file_marks_string, exception_string)
-    with open(getTempFilePath(), "w") as output_file:
+    with open(get_temp_file_path(), "w") as output_file:
         output_file.write(jsonOutput)
 
 
-def getTempFilePath():
+def get_temp_file_path():
     tempdir = tempfile.gettempdir()
     return os.path.join(tempdir, "runtime_test_report.json")
 
